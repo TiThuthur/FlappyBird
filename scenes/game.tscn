@@ -1,9 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://cai1sfe8vfxd1"]
+[gd_scene load_steps=4 format=3 uid="uid://cai1sfe8vfxd1"]
 
 [ext_resource type="PackedScene" uid="uid://bkqyxg3rmh7gy" path="res://scenes/Bird.tscn" id="1_uwrxv"]
 [ext_resource type="Script" uid="uid://bbrsj13jwyqor" path="res://scripts/Game.cs" id="1_yqjtg"]
+[ext_resource type="PackedScene" uid="uid://dlwkg5ft1cfo6" path="res://scenes/Sol.tscn" id="2_lnu2h"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_yqjtg")
+solScene = ExtResource("2_lnu2h")
 
 [node name="Bird" parent="." instance=ExtResource("1_uwrxv")]
+gravity = 2800.0
+flapForce = -150.0
+maxFlapTime = 0.07

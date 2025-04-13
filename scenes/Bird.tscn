@@ -25,21 +25,21 @@ region = Rect2(48, 0, 16, 16)
 [sub_resource type="SpriteFrames" id="SpriteFrames_d6fft"]
 animations = [{
 "frames": [{
-"duration": 1.0,
+"duration": 0.5,
 "texture": SubResource("AtlasTexture_636r2")
 }, {
-"duration": 1.0,
+"duration": 0.5,
 "texture": SubResource("AtlasTexture_lvohb")
 }, {
-"duration": 1.0,
+"duration": 0.5,
 "texture": SubResource("AtlasTexture_3a0cx")
 }, {
-"duration": 1.0,
+"duration": 0.5,
 "texture": SubResource("AtlasTexture_rg2p2")
 }],
-"loop": true,
+"loop": false,
 "name": &"Fly",
-"speed": 5.0
+"speed": 8.0
 }]
 
 [node name="Bird" type="CharacterBody2D"]
@@ -51,3 +51,5 @@ shape = SubResource("CircleShape2D_81snh")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_d6fft")
 animation = &"Fly"
+frame = 3
+frame_progress = 1.0

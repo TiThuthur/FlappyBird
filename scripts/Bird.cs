@@ -7,7 +7,11 @@ public partial class Bird : CharacterBody2D
     public float gravity = 800f;
     [Export]
     public float flapForce = -300f;
+    [Export]
+    public float maxFlapTime = 0.2f;//durée maximum du saut
     Vector2 screenSize;
+    private bool isFlapping = false;//état en vol
+    private float flapTimeLeft = 0f;//temps de vol restant
     private Vector2 velocity = Vector2.Zero;
     
     public override void _Ready()
@@ -17,18 +21,26 @@ public partial class Bird : CharacterBody2D
     }
     public override void _PhysicsProcess(double delta)
     {
-        velocity = Vector2.Zero;
-        if (Input.IsActionPressed("fly"))
+        velocity.Y = gravity * (float)delta; //affectation de la gravitée
+
+        if (Input.IsActionJustPressed("fly"))
         {
-            velocity = new Vector2(1, -1);
-            
+            isFlapping = true;//on passe en vol
+            flapTimeLeft = maxFlapTime;//on attribut au temps restant la valeur maximum de vol possible
         }
-        if (velocity.X > 0  )
+        
+        if (Input.IsActionPressed("fly") && isFlapping)
         {
             GetNode<AnimatedSprite2D>("AnimatedSprite2D").Play("Fly");
-            
+            velocity.Y = flapForce;//saut / vol
+            flapTimeLeft -= (float)delta;//réduction du temps
+            if (flapTimeLeft <= 0f)
+            {
+                isFlapping = false;//temps dépassé on arrêt le vol
+            }
         }
-        velocity.Y = gravity;
+        
+        Velocity = velocity;
         MoveAndSlide();
     }
     
